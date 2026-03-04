@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { callOpenRouter, SYSTEM_PROMPT } from '../utils';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
     try {
         const data = await req.json();
