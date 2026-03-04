@@ -1,7 +1,7 @@
 # **#75HER Challenge: Decision Log**
 
 **Project Name:** TechReady
-**Team Name:** TechReady Team
+**Team Name:** Ritwika Kancharla
 
 ---
 

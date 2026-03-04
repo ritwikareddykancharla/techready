@@ -1,7 +1,7 @@
 # **#75HER Challenge: Risk Log**
 
 **Project Name:** TechReady
-**Team Name:** TechReady Team
+**Team Name:** Ritwika Kancharla
 
 ---
 

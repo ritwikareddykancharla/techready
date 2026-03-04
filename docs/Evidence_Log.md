@@ -1,7 +1,7 @@
 # **#75HER Challenge: Evidence Log**
 
 **Project Name:** TechReady
-**Team Name:** TechReady Team
+**Team Name:** Ritwika Kancharla
 
 ---
 

@@ -1,6 +1,6 @@
 # **#75HER Challenge: AI Trace Log**
 
-**Project Name:** TechReady **Team Name:** TechReady Team
+**Project Name:** TechReady **Team Name:** Ritwika Kancharla
 
 ---
 
