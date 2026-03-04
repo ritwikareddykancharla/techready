@@ -1,66 +1,77 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import SetupPanel from './components/SetupPanel';
+import InterviewPanel from './components/InterviewPanel';
 
 export default function Home() {
+  const [activePanel, setActivePanel] = useState<'setup' | 'interview'>('setup');
+  const [sessionData, setSessionData] = useState({
+    topic: 'Python',
+    difficulty: 'Medium',
+    messages: [] as any[],
+  });
+
+  const handleStart = async (topic: string, difficulty: string) => {
+    try {
+      const res = await fetch('/api/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic, difficulty }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Failed to start error');
+
+      setSessionData({
+        topic,
+        difficulty,
+        messages: data.messages,
+      });
+      setActivePanel('interview');
+    } catch (err) {
+      alert('Error connecting. Check your configuration and try again.');
+      throw err;
+    }
+  };
+
+  const handleReset = () => {
+    setActivePanel('setup');
+    setSessionData({ ...sessionData, messages: [] });
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
+
+      <div className="app-container">
+        <header>
+          <div>
+            <div className="logo">Tech<span>Ready</span></div>
+            <div className="tagline">// ai-powered mock interviews</div>
+          </div>
+          <div className="status-pill">
+            <div className={`status-dot ${activePanel === 'interview' ? 'live' : ''}`}></div>
+            <span>{activePanel === 'interview' ? 'live' : 'offline'}</span>
+          </div>
+        </header>
+
+        {activePanel === 'setup' ? (
+          <SetupPanel
+            defaultTopic={sessionData.topic}
+            defaultDifficulty={sessionData.difficulty}
+            onStart={handleStart}
+          />
+        ) : (
+          <InterviewPanel
+            sessionData={sessionData}
+            setSessionData={setSessionData}
+            onReset={handleReset}
+          />
+        )}
+      </div>
+    </>
   );
 }
