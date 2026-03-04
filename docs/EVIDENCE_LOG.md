@@ -1,6 +1,7 @@
 # **#75HER Challenge: Evidence Log**
 
 **Project Name:** TechReady
+
 **Team Name:** Ritwika Kancharla
 
 ---
@@ -19,7 +20,7 @@
 
 ## **🤖 AI-Generated Content Log**
 
-| AI Tool Used | Purpose | What AI Generated | What You Changed | Verification Method |
+| AI Tool Used | Purpose | What AI Generated | What I Changed | Verification Method |
 | :---- | :---- | :---- | :---- | :---- |
 | [Antigravity/Claude] | [Migration to Next.js] | [Converted Python Flask routes to Next.js API route syntax in `src/app/api`] | [Refactored to separate logic into `utils.ts` and ensure environment variables loaded properly from `.env`] | [Tested start, respond, hint, and skip endpoints locally via UI] |
 | [Antigravity/Claude] | [UI Componentization] | [Split single `index.html` into generic `SetupPanel.tsx` and `InterviewPanel.tsx` React components] | [Mapped the client-side state correctly over to the new props system.] | [Tested full user flow manually in staging environment on localhost:3000] |
@@ -31,7 +32,7 @@
 * [x] At least 3 credible sources documented.  
 * [x] Every image, icon, and asset has license info.  
 * [x] All code dependencies (npm/pip) are listed with licenses.  
-* [x] AI-generated content includes a "What You Changed" description.  
+* [x] AI-generated content includes a "What I Changed" description.  
 * [x] All links are active and accessible to judges.  
 * [x] No "TBD" or placeholder text remains.
 
