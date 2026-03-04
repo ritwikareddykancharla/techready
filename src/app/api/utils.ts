@@ -20,6 +20,10 @@ Topics you can interview on: Python, Data Structures & Algorithms, System Design
 export async function callOpenRouter(messages: { role: string; content: string }[]) {
     const apiKey = process.env.OPENROUTER_API_KEY || '';
 
+    // DEBUGGING: Log whether the key exists to Vercel Server Logs
+    console.log('[DEBUG] OPENROUTER_API_KEY exists?', !!process.env.OPENROUTER_API_KEY);
+    console.log('[DEBUG] OPENROUTER_API_KEY length:', apiKey.length);
+
     const response = await fetch(OPENROUTER_URL, {
         method: 'POST',
         headers: {
