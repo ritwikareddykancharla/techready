@@ -1,4 +1,6 @@
-# TechReady — AI Mock Interview Coach
+> **⚠️ LEGACY VERSION:** This directory contains the original Python/Flask version of the application. The project has since been migrated to Next.js. Please see the root `README.md` for the current architecture.
+
+# TechReady — AI Mock Interview Coach (Legacy Flask Version)
 
 > *Helping women and underrepresented engineers break into tech — one interview at a time.*
 
