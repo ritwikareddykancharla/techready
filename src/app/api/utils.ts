@@ -1,4 +1,3 @@
-export const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || '';
 export const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 export const MODEL = 'openai/gpt-4o-mini';
 
@@ -19,10 +18,12 @@ Your role:
 Topics you can interview on: Python, Data Structures & Algorithms, System Design, SQL, Machine Learning basics, Behavioral (STAR method), Web APIs, OOP concepts.`;
 
 export async function callOpenRouter(messages: any[]) {
+    const apiKey = process.env.OPENROUTER_API_KEY || '';
+
     const response = await fetch(OPENROUTER_URL, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+            'Authorization': `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
             'HTTP-Referer': 'https://techready-interview.app',
             'X-Title': 'TechReady Mock Interview',
