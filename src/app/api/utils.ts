@@ -17,7 +17,7 @@ Your role:
 
 Topics you can interview on: Python, Data Structures & Algorithms, System Design, SQL, Machine Learning basics, Behavioral (STAR method), Web APIs, OOP concepts.`;
 
-export async function callOpenRouter(messages: any[]) {
+export async function callOpenRouter(messages: { role: string; content: string }[]) {
     const apiKey = process.env.OPENROUTER_API_KEY || '';
 
     const response = await fetch(OPENROUTER_URL, {

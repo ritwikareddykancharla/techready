@@ -1,14 +1,25 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
+
+export interface Message {
+    role: string;
+    content: string;
+}
+
+export interface SessionData {
+    topic: string;
+    difficulty: string;
+    messages: Message[];
+}
 
 export default function InterviewPanel({
     sessionData,
     setSessionData,
     onReset,
 }: {
-    sessionData: any;
-    setSessionData: any;
+    sessionData: SessionData;
+    setSessionData: Dispatch<SetStateAction<SessionData>>;
     onReset: () => void;
 }) {
     const [input, setInput] = useState('');
@@ -46,7 +57,7 @@ export default function InterviewPanel({
             });
             const data = await res.json();
             setSessionData({ ...sessionData, messages: data.messages });
-        } catch (err) {
+        } catch {
             setSessionData({
                 ...sessionData,
                 messages: [...newMessages, { role: 'assistant', content: '⚠️ Something went wrong. Please try again.' }],
@@ -69,7 +80,7 @@ export default function InterviewPanel({
                 ...sessionData,
                 messages: [...sessionData.messages, { role: 'assistant', content: '💡 ' + data.message }],
             });
-        } catch (err) {
+        } catch {
             setSessionData({
                 ...sessionData,
                 messages: [...sessionData.messages, { role: 'assistant', content: '⚠️ Could not fetch hint.' }],
@@ -89,7 +100,7 @@ export default function InterviewPanel({
             });
             const data = await res.json();
             setSessionData({ ...sessionData, messages: data.messages });
-        } catch (err) {
+        } catch {
             setSessionData({
                 ...sessionData,
                 messages: [...sessionData.messages, { role: 'assistant', content: '⚠️ Could not skip.' }],
@@ -125,8 +136,8 @@ export default function InterviewPanel({
 
             <div id="chat-area">
                 {sessionData.messages
-                    .filter((m: any) => m.role !== 'system')
-                    .map((msg: any, i: number) => (
+                    .filter((m: Message) => m.role !== 'system')
+                    .map((msg: Message, i: number) => (
                         <div key={i} className={`message ${msg.role}`}>
                             <div className={`msg-avatar ${msg.role}`}>
                                 {msg.role === 'assistant' ? '🪿' : '👩'}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import SetupPanel from './components/SetupPanel';
 import InterviewPanel from './components/InterviewPanel';
 
@@ -9,7 +9,7 @@ export default function Home() {
   const [sessionData, setSessionData] = useState({
     topic: 'Python',
     difficulty: 'Medium',
-    messages: [] as any[],
+    messages: [] as { role: string; content: string }[],
   });
 
   const handleStart = async (topic: string, difficulty: string) => {
@@ -50,7 +50,7 @@ export default function Home() {
         <header>
           <div>
             <div className="logo">Tech<span>Ready</span></div>
-            <div className="tagline">// ai-powered mock interviews</div>
+            <div className="tagline">{"// ai-powered mock interviews"}</div>
           </div>
           <div className="status-pill">
             <div className={`status-dot ${activePanel === 'interview' ? 'live' : ''}`}></div>

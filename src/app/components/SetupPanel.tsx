@@ -3,94 +3,94 @@
 import { useState } from 'react';
 
 export default function SetupPanel({
-    defaultTopic,
-    defaultDifficulty,
-    onStart,
+  defaultTopic,
+  defaultDifficulty,
+  onStart,
 }: {
-    defaultTopic: string;
-    defaultDifficulty: string;
-    onStart: (topic: string, diff: string) => Promise<void>;
+  defaultTopic: string;
+  defaultDifficulty: string;
+  onStart: (topic: string, diff: string) => Promise<void>;
 }) {
-    const [topic, setTopic] = useState(defaultTopic);
-    const [difficulty, setDifficulty] = useState(defaultDifficulty);
-    const [isStarting, setIsStarting] = useState(false);
+  const [topic, setTopic] = useState(defaultTopic);
+  const [difficulty, setDifficulty] = useState(defaultDifficulty);
+  const [isStarting, setIsStarting] = useState(false);
 
-    const topics = [
-        { id: 'Python', label: '🐍 Python' },
-        { id: 'Data Structures', label: '📊 DSA' },
-        { id: 'System Design', label: '🏗️ System Design' },
-        { id: 'SQL', label: '🗄️ SQL' },
-        { id: 'Machine Learning', label: '🤖 ML Basics' },
-        { id: 'Behavioral', label: '💬 Behavioral' },
-        { id: 'Web APIs', label: '🌐 Web APIs' },
-        { id: 'OOP', label: '📦 OOP' },
-        { id: 'JavaScript', label: '⚡ JavaScript' },
-    ];
+  const topics = [
+    { id: 'Python', label: '🐍 Python' },
+    { id: 'Data Structures', label: '📊 DSA' },
+    { id: 'System Design', label: '🏗️ System Design' },
+    { id: 'SQL', label: '🗄️ SQL' },
+    { id: 'Machine Learning', label: '🤖 ML Basics' },
+    { id: 'Behavioral', label: '💬 Behavioral' },
+    { id: 'Web APIs', label: '🌐 Web APIs' },
+    { id: 'OOP', label: '📦 OOP' },
+    { id: 'JavaScript', label: '⚡ JavaScript' },
+  ];
 
-    const handleStart = async () => {
-        setIsStarting(true);
-        try {
-            await onStart(topic, difficulty);
-        } catch (err) {
-            console.error(err);
-        }
-        setIsStarting(false);
-    };
+  const handleStart = async () => {
+    setIsStarting(true);
+    try {
+      await onStart(topic, difficulty);
+    } catch (err) {
+      console.error(err);
+    }
+    setIsStarting(false);
+  };
 
-    return (
-        <div id="setup-panel" style={{ display: 'flex' }}>
-            <div className="setup-hero">
-                <h1>
-                    You belong<br />in <em>tech.</em>
-                </h1>
-                <p>
-                    Practice real technical interview questions with an AI coach that gives
-                    you honest, actionable feedback.
-                </p>
-            </div>
+  return (
+    <div id="setup-panel" style={{ display: 'flex' }}>
+      <div className="setup-hero">
+        <h1>
+          You belong<br />in <em>tech.</em>
+        </h1>
+        <p>
+          Practice real technical interview questions with an AI coach that gives
+          you honest, actionable feedback.
+        </p>
+      </div>
 
-            <div className="setup-card">
-                <div className="form-group">
-                    <label>Choose a topic</label>
-                    <div className="topic-grid">
-                        {topics.map((t) => (
-                            <button
-                                key={t.id}
-                                className={`topic-btn ${topic === t.id ? 'selected' : ''}`}
-                                onClick={() => setTopic(t.id)}
-                            >
-                                {t.label}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+      <div className="setup-card">
+        <div className="form-group">
+          <label>Choose a topic</label>
+          <div className="topic-grid">
+            {topics.map((t) => (
+              <button
+                key={t.id}
+                className={`topic-btn ${topic === t.id ? 'selected' : ''}`}
+                onClick={() => setTopic(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                <div className="form-group">
-                    <label>Difficulty</label>
-                    <div className="diff-row">
-                        {['Easy', 'Medium', 'Hard'].map((d) => (
-                            <button
-                                key={d}
-                                className={`diff-btn ${difficulty === d ? 'selected' : ''}`}
-                                data-d={d}
-                                onClick={() => setDifficulty(d)}
-                            >
-                                {d}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+        <div className="form-group">
+          <label>Difficulty</label>
+          <div className="diff-row">
+            {['Easy', 'Medium', 'Hard'].map((d) => (
+              <button
+                key={d}
+                className={`diff-btn ${difficulty === d ? 'selected' : ''}`}
+                data-d={d}
+                onClick={() => setDifficulty(d)}
+              >
+                {d}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                <button
-                    className="start-btn"
-                    onClick={handleStart}
-                    disabled={isStarting}
-                >
-                    {isStarting ? 'Loading...' : 'Start Interview →'}
-                </button>
-            </div>
+        <button
+          className="start-btn"
+          onClick={handleStart}
+          disabled={isStarting}
+        >
+          {isStarting ? 'Loading...' : 'Start Interview →'}
+        </button>
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
         #setup-panel {
           flex: 1;
           flex-direction: column;
@@ -220,6 +220,6 @@ export default function SetupPanel({
           .setup-hero h1 { font-size: 1.8rem; }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }

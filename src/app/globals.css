@@ -51,12 +51,41 @@ body::before {
   z-index: 0;
   animation: blobDrift 12s ease-in-out infinite alternate;
 }
-.blob-1 { width: 400px; height: 400px; background: #7c6af720; top: -100px; left: -100px; }
-.blob-2 { width: 300px; height: 300px; background: #f75f8a18; bottom: -80px; right: -80px; animation-delay: -4s; }
-.blob-3 { width: 200px; height: 200px; background: #43e8b015; top: 50%; left: 40%; animation-delay: -8s; }
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: #7c6af720;
+  top: -100px;
+  left: -100px;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: #f75f8a18;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: -4s;
+}
+
+.blob-3 {
+  width: 200px;
+  height: 200px;
+  background: #43e8b015;
+  top: 50%;
+  left: 40%;
+  animation-delay: -8s;
+}
+
 @keyframes blobDrift {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(30px, 20px) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(30px, 20px) scale(1.1);
+  }
 }
 
 /* Layout */
@@ -79,6 +108,7 @@ header {
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
 }
+
 .logo {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
@@ -88,16 +118,19 @@ header {
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
+
 .logo span {
   color: var(--accent3);
   -webkit-text-fill-color: var(--accent3);
 }
+
 .tagline {
   font-size: 0.75rem;
   color: var(--muted);
   font-family: 'DM Mono', monospace;
   margin-top: 2px;
 }
+
 .status-pill {
   display: flex;
   align-items: center;
@@ -110,25 +143,44 @@ header {
   font-family: 'DM Mono', monospace;
   color: var(--muted);
 }
+
 .status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--muted);
 }
+
 .status-dot.live {
   background: var(--accent3);
   box-shadow: 0 0 8px var(--accent3);
   animation: pulse 2s infinite;
 }
+
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
 
 /* Setup Panel and Interview Panel specific CSS classes are scoped to components */
