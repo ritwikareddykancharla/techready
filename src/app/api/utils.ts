@@ -24,6 +24,11 @@ export async function callOpenRouter(messages: { role: string; content: string }
     console.log('[DEBUG] OPENROUTER_API_KEY exists?', !!process.env.OPENROUTER_API_KEY);
     console.log('[DEBUG] OPENROUTER_API_KEY length:', apiKey.length);
 
+    // Early check for missing API key - this will help debug Vercel deployment
+    if (!apiKey) {
+        throw new Error('OPENROUTER_API_KEY environment variable is not set. Please configure it in Vercel dashboard.');
+    }
+
     const response = await fetch(OPENROUTER_URL, {
         method: 'POST',
         headers: {
@@ -41,10 +46,29 @@ export async function callOpenRouter(messages: { role: string; content: string }
     });
 
     if (!response.ok) {
-        console.error('OpenRouter error:', await response.text());
-        throw new Error(`Error from OpenRouter: ${response.statusText}`);
+        const errorText = await response.text();
+        console.error('OpenRouter API Error:', {
+            status: response.status,
+            statusText: response.statusText,
+            body: errorText
+        });
+        
+        if (response.status === 401) {
+            throw new Error('Invalid API key. Please check your OPENROUTER_API_KEY configuration.');
+        }
+        if (response.status === 429) {
+            throw new Error('API rate limit exceeded. Please try again later.');
+        }
+        
+        throw new Error(`API Error ${response.status}: ${response.statusText}`);
     }
 
     const data = await response.json();
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+        console.error('Invalid API response structure:', data);
+        throw new Error('Invalid response from AI service');
+    }
+    
     return data.choices[0].message.content;
 }
